@@ -58,6 +58,10 @@ export default {
       // 2. 将查询结果更新到state中
       context.commit("refreshProducts",response.data);
     },
+    async findProductByCategoryId(context,id){
+      let response = await get("/product/findByCategoryId?id="+id);
+      context.commit("refreshProducts",response.data);
+    },
     // payload 顾客信息
     async saveOrUpdateProduct({commit,dispatch},payload){
       // 1. 保存或更新

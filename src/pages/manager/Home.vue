@@ -6,7 +6,8 @@
     <van-row>
       <van-grid :column-num="3">
         <van-grid-item
-          v-for="c in categories"
+          @click="findProduct(c,index)"
+          v-for="(c, index) in categories"
           :key="c.id"
           :icon="c.icon"
           :text="c.name"
@@ -25,7 +26,10 @@ export default {
     ...mapState("category",["categories"])
   },
   methods:{
-    ...mapActions("category",["findAllCategories"])
+    ...mapActions("category",["findAllCategories"]),
+    findProduct(category,index){
+      this.$router.push({name:"product",query:{category,index}})
+    }
   }
 }
 </script>
