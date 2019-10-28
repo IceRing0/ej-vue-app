@@ -49,6 +49,11 @@ const routes = [
     path: '/address',
     name: 'address',
     component: () => import('../pages/Address.vue')
+  },
+  {
+    path: '/saveorupdateaddress',
+    name: 'saveorupdateaddress',
+    component: () => import('../pages/SaveOrUpdateAddress.vue')
   }
 ]
 

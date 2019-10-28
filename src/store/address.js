@@ -1,18 +1,38 @@
-import {get} from '../http/axios'
+import {get, post} from '../http/axios'
 export default {
   namespaced:true,
   state:{
-    address:[]
+    addresses:[]
   },
   mutations:{
-    refreshAddress(state,address){
-      state.address = address;
+    refreshAddress(state,addresses){
+      state.addresses = addresses;
     }
   },
   actions:{
-    async findAddressByCustomerId(context,id){
-      let response = await get("/address/findByCustomerId?id="+id);
+    // 查找
+    async findAddressByCustomerId(context){
+      let response = await get("/address/findByCustomerId?id=1221650")
       context.commit("refreshAddress",response.data)
+      return response;
+    },
+    // 保存或更新
+    async saveOrUpdateAddress({dispatch},address){
+      // 添加
+      let response = await post("/address/saveOrUpdate",address)
+      // 刷新
+      dispatch("findAddressByCustomerId")
+      // 返回
+      return response
+    },
+    // 删除
+    async deleteAddressById({dispatch},id){
+      // 删除
+      let response = await get("/address/deleteById?id="+id)
+      // 刷新
+      dispatch("findAddressByCustomerId")
+      // 返回
+      return response
     }
   }
 }
