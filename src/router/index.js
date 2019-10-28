@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Manager from '../pages/manager/Layout.vue'
+import Order from '../pages/manager/Order.vue'
 
 Vue.use(VueRouter)
 
@@ -14,7 +15,21 @@ const routes = [
       component:() => import('../pages/manager/Home.vue')
     },{
       path:"order",
-      component:() => import('../pages/manager/Order.vue')
+      component:Order,
+      children:[{
+          path:"order_all",
+          component:() => import('../pages/manager/order/Order_all.vue')
+        },{
+          path:"order_dpd",
+          component:() => import('../pages/manager/order/Order_dpd.vue')
+        },{
+          path:"order_djd",
+          component:() => import('../pages/manager/order/Order_djd.vue')
+        },{
+          path:"order_wfw",
+          component:() => import('../pages/manager/order/Order_wfw.vue')
+        }
+      ]
     },{
       path:"user",
       component:() => import('../pages/manager/User.vue')
